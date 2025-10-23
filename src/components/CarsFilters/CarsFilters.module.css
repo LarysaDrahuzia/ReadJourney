@@ -1,0 +1,113 @@
+.filtersForm {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: flex-end;
+  justify-content: center;
+
+  max-width: 924px;
+  margin: 84px auto 56px;
+}
+
+.field {
+  padding: 0;
+}
+
+.labelBrand,
+.labelPrice,
+.labelMileage {
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+  line-height: 16px;
+  color: #8d929a;
+
+  flex: 1;
+}
+
+.labelBrand {
+  max-width: 204px;
+  margin-bottom: 8px;
+}
+
+.labelPrice {
+  max-width: 196px;
+  margin-bottom: 8px;
+}
+
+.labelMileage {
+  max-width: 320px;
+}
+
+/* .select {
+  height: 44px;
+  border: none;
+  border-radius: 12px;
+  background-color: #f7f7f7;
+  font-size: 16px;
+  font-weight: 500;
+  color: #101828;
+  padding: 0 16px;
+  margin-top: 8px;
+  outline: none;
+  appearance: auto;
+  max-width: 204px;
+} */
+
+/* Mileage field layout */
+.mileageWrapper {
+  display: flex;
+  gap: 0;
+  width: 100%;
+  margin-top: 8px;
+}
+
+/* Обгортка для тексту + інпуту */
+.fakeInput {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  background-color: #f7f7f7;
+  padding: 0 12px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #101828;
+  height: 44px;
+}
+
+/* Текст "From" / "To" */
+.staticText {
+  margin-left: 12px;
+  margin-right: 4px;
+  color: #101828;
+
+  white-space: nowrap;
+  font-size: 16px;
+}
+
+/* Внутрішній інпут */
+.input {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  font-size: 16px;
+  font-weight: 500;
+  color: #101828;
+  width: 100%;
+}
+
+/* Скруглення країв */
+.fakeInput:first-child {
+  border-radius: 12px 0 0 12px;
+}
+.fakeInput:last-child {
+  border-radius: 0 12px 12px 0;
+  border-left: 1px solid #e5e5e5;
+}
+
+/* Search button */
+.searchBtn {
+  width: 156px;
+  height: 44px;
+  margin-top: 8px;
+}

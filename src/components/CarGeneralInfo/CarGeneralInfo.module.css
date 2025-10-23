@@ -1,0 +1,50 @@
+/* CarGeneralInfo.module.css */
+.info {
+  display: flex;
+  flex-direction: column;
+}
+
+.car {
+  margin-bottom: 8px;
+}
+
+.title {
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 600;
+  color: #101828;
+}
+
+.id {
+  color: #8d929a;
+  margin-left: 16px;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 500;
+}
+
+.addressInfo {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  gap: 2px;
+}
+
+.text,
+.description {
+  color: #101828;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 500;
+}
+
+.price {
+  font-size: 24px;
+  font-weight: 600;
+  color: #3470ff;
+  margin-bottom: 32px;
+}
+
+.description {
+  margin-bottom: 68px;
+}

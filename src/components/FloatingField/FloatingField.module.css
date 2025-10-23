@@ -1,0 +1,26 @@
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px; /* або margin-bottom */
+  margin-bottom: 16px; /* додає відстань до наступного інпуту */
+}
+
+.input {
+  width: 576px;
+  background-color: #f7f7f7;
+  padding: 12px 20px;
+  color: #101828;
+  border-radius: 12px;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 500;
+  border: none;
+  outline: none;
+}
+
+.error {
+  font-size: 14px;
+  color: red;
+  margin-top: 2px;
+  line-height: 1.2;
+}

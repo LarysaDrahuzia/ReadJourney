@@ -1,0 +1,40 @@
+.hero {
+  background-image: linear-gradient(
+      to left,
+      rgba(0, 0, 0, 0.2),
+      rgba(0, 0, 0, 0.2)
+    ),
+    url('/carPicture.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-block: 436px 60px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 783px;
+  align-items: center;
+}
+.titleHero {
+  font-size: 60px;
+  font-weight: 700;
+  line-height: 72px;
+  color: #fff;
+  margin-bottom: 16px;
+}
+
+.text {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 32px;
+  color: #fff;
+  margin-bottom: 40px;
+}
+.button {
+  padding: 12px 88px;
+  max-width: 276px;
+}
