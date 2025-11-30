@@ -5,10 +5,11 @@ html {
 
 body {
   margin: 0;
-  font-family: 'Manrope', sans-serif;
-
-  background: #fff;
+  font-family: system-ui, -apple-system, 'Segoe UI', Gilroy, sans-serif;
+  color: #f9f9f9;
+  background: #141414;
   min-height: 100vh;
+  letter-spacing: -0.02em;
 }
 
 h1,
@@ -59,4 +60,26 @@ img {
   clip-path: inset(100%);
   clip: rect(0 0 0 0);
   overflow: hidden;
+}
+
+.container {
+  min-width: 320px;
+  max-width: 375px;
+  padding-right: 20px;
+  padding-left: 20px;
+  margin: 0 auto;
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 768px;
+    padding-right: 32px;
+    padding-left: 32px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .container {
+    max-width: 1440px;
+  }
 }

@@ -1,38 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchBrands } from '../cars/operations.js';
+
+const initialState = {
+  title: '',
+  author: '',
+  pages: '',
+};
 
 const filtersSlice = createSlice({
   name: 'filters',
-  initialState: {
-    brands: [],
-    rentalPrice: '',
-    minMileage: '',
-    maxMileage: '',
-    isLoading: false,
-    error: null,
-  },
+  initialState,
   reducers: {
     setFilters(state, action) {
       return { ...state, ...action.payload };
     },
-    resetFilters() {
-      return;
-    },
-  },
-  extraReducers: builder => {
-    builder
-      .addCase(fetchBrands.pending, state => {
-        state.isLoading = true;
-        state.error = null;
-      })
-      .addCase(fetchBrands.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.brands = action.payload;
-      })
-      .addCase(fetchBrands.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.payload;
-      });
+    resetFilters: () => ({ ...initialState }),
   },
 });
 

@@ -1,0 +1,209 @@
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import Button from '../Button/Button.jsx';
+import { Eye, EyeCrossed, InputCorrect, InputError } from '../Icons/Icons.jsx';
+import { useDispatch } from 'react-redux';
+import { useNavigate, Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { registerUser } from '../../redux/auth/operations.js';
+import css from './RegisterForm.module.css';
+
+const schema = yup.object({
+  name: yup
+    .string()
+    .trim()
+    .min(3, 'Name must contain at least 3 symbols')
+    .max(40, 'Maximum 40 symbols')
+    .matches(
+      /^[\p{L}\s'’-]+$/u,
+      'Only letters, spaces, apostrophes, and hyphens'
+    )
+    .required('Enter a name'),
+  email: yup
+    .string()
+    .trim()
+    .email('Incorrect email')
+    .matches(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/, 'Please enter a valid email')
+    .required('Enter email'),
+  password: yup
+    .string()
+    .min(7, 'Password must contain at least 7 symbols')
+    .matches(/[A-ZА-ЯЇІЄҐ]/, 'At least one capital letter')
+    .matches(/[a-zа-яїієґ]/, 'At least one lowercase letter')
+    .matches(/[0-9]/, 'At least one digit')
+    .required('Enter password'),
+});
+
+const RegisterForm = () => {
+  const [showPwd, setShowPwd] = useState(false);
+  const [pwdValue, setPwdValue] = useState('');
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const {
+    register: rhfRegister,
+    handleSubmit,
+    reset,
+    setError,
+    formState: { errors, isValid, isSubmitting },
+  } = useForm({
+    resolver: yupResolver(schema),
+    mode: 'onTouched',
+    defaultValues: { name: '', email: '', password: '' },
+  });
+
+  const onSubmit = async values => {
+    try {
+      const res = await dispatch(registerUser(values)).unwrap();
+      toast.success('Registration successful!');
+      reset();
+      navigate('/recommended');
+    } catch (error) {
+      console.error('register error payload:', error);
+      const msg =
+        typeof error === 'string'
+          ? error
+          : error?.message || 'Registration failed';
+      setError('email', { type: 'server', message: msg });
+      toast.error(msg);
+    }
+  };
+
+  return (
+    <form className={css.form} onSubmit={handleSubmit(onSubmit)} oValidate>
+      <h1 className={css.title}>
+        {' '}
+        Expand your mind, reading
+        <span className={css.part}>a book</span>
+      </h1>
+      <div className={css.formList}>
+        {/* Name */}
+        <div className={css.fieldWrapper}>
+          <div className={css.field}>
+            <label htmlFor="name" className={css.label}>
+              {' '}
+              Name:{' '}
+            </label>
+            <input
+              {...rhfRegister('name')}
+              id="name"
+              type="text"
+              placeholder="Ilona Ratushniak"
+              autoComplete="name"
+              aria-invalid={!!errors.name}
+              aria-describedby={errors.name ? 'name-error' : undefined}
+              className={`${css.input} ${errors.name ? css.inputError : ''}`}
+            />
+          </div>{' '}
+          {errors.name && (
+            <span id="name-error" className={css.errorText}>
+              {' '}
+              {errors.name.message}{' '}
+            </span>
+          )}
+        </div>
+        {/* Email */}
+        <div className={css.fieldWrapper}>
+          <div className={css.field}>
+            <label htmlFor="email" className={css.label}>
+              {' '}
+              Mail:{' '}
+            </label>
+            <input
+              {...rhfRegister('email')}
+              id="email"
+              type="email"
+              placeholder="Your@email.com"
+              autoComplete="email"
+              aria-invalid={!!errors.email}
+              aria-describedby={errors.email ? 'email-error' : undefined}
+              className={`${css.input} ${errors.email ? css.inputError : ''}`}
+            />
+          </div>{' '}
+          {errors.email && (
+            <span id="email-error" className={css.errorText}>
+              {' '}
+              {errors.email.message}
+            </span>
+          )}
+        </div>
+        <div className={css.fieldWrapper}>
+          <div
+            className={`${css.field} ${
+              errors.password ? css.fieldError : isValid ? css.fieldCorrect : ''
+            }`}
+          >
+            <label htmlFor="password" className={css.label}>
+              {' '}
+              Password:{' '}
+            </label>
+            <input
+              {...rhfRegister('password')}
+              id="password"
+              type={showPwd ? 'text' : 'password'}
+              placeholder="Yourpasswordhere"
+              className={css.input}
+              aria-invalid={!!errors.password}
+              aria-describedby={errors.password ? 'password-error' : undefined}
+              autoComplete="new-password"
+              onChange={e => setPwdValue(e.target.value)}
+            />
+            {!errors.password && !isValid && (
+              <button
+                type="button"
+                onClick={() => setShowPwd(prev => !prev)}
+                className={css.eyeBtn}
+              >
+                {' '}
+                {pwdValue.length === 0 ? (
+                  <Eye />
+                ) : showPwd ? (
+                  <Eye />
+                ) : (
+                  <EyeCrossed />
+                )}
+              </button>
+            )}
+            {errors.password && (
+              <>
+                <span id="password-error" className={css.icon}>
+                  <InputError />
+                </span>
+              </>
+            )}
+            {!errors.password && isValid && (
+              <>
+                <span id="password-correct" className={css.icon}>
+                  <InputCorrect />
+                </span>
+              </>
+            )}
+          </div>
+          {errors.password ? (
+            <p className={css.errorText}>{errors.password.message}</p>
+          ) : isValid ? (
+            <p className={css.correctText}>Password is secure</p>
+          ) : null}
+        </div>
+      </div>
+      <div className={css.register}>
+        <Button
+          className={css.submit}
+          type="submit"
+          variant="primary"
+          disabled={!isValid || isSubmitting}
+        >
+          {' '}
+          {isSubmitting ? 'Signing Up...' : 'Registration'}
+        </Button>
+        <Link to="/login" className={css.link}>
+          {' '}
+          Already have an account?
+        </Link>
+      </div>
+    </form>
+  );
+};
+
+export default RegisterForm;
