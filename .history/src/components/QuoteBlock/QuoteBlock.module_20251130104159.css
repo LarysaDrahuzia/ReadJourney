@@ -1,0 +1,22 @@
+.quoteBlock {
+  display: none;
+}
+
+@media screen and (min-width: 1440px) {
+  .quoteBlock {
+    display: flex;
+    padding: 15px 20px 14px;
+    gap: 14px;
+  }
+
+  .text {
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 500;
+    color: #686868;
+  }
+
+  .part {
+    color: #f9f9f9;
+  }
+}

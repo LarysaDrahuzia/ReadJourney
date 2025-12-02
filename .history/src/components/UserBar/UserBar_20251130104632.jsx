@@ -28,7 +28,7 @@ const UserBar = ({ showName = true }) => {
     <div className={css.userBar}>
       <div className={css.avatar}>{firstLetter}</div>
       {showName && <div className={css.name}>{userName || 'User'}</div>}
-      <Button className={css.logout} onClick={handleLogout} variant="secondary">
+      <Button className={css.logout} onClick={handleLogout} variant=''>
         Log out
       </Button>
     </div>
