@@ -1,0 +1,24 @@
+.wrapper {
+  padding: 20px 40px 0 40px;
+}
+
+.picture {
+  /* width: 255px; */
+  /* position: relative; */
+  /* border-radius: 30px; */
+  /* overflow: hidden;
+  padding: 0; */
+  width: 255px;
+  height: 351px;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url(/iPhone.jpg);
+}
+
+/* .image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+} */

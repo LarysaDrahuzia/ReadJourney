@@ -1,0 +1,15 @@
+.logo {
+  font-size: 16px;
+  line-height: 12px;
+  font-weight: 800;
+  margin-left: 120px;
+  margin-right: 960px;
+}
+
+.logoBold {
+  color: #000;
+}
+
+.logoColored {
+  color: #3470ff;
+}
