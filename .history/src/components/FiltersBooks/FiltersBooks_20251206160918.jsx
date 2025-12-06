@@ -3,10 +3,9 @@ import { setFilters } from '../../redux/filters/slice.js';
 
 import Button from '../Button/Button.jsx';
 import css from './FiltersBooks.module.css';
-import { selectFilters } from '../../redux/filters/selectors.js';
 
 const FiltersBooks = ({ fields, onFilter }) => {
-  const filters = useSelector(selectFilters);
+  const filters = useSelector(state => state.filters);
   const dispatch = useDispatch();
 
   const handleSubmit = e => {
@@ -22,12 +21,13 @@ const FiltersBooks = ({ fields, onFilter }) => {
   return (
     <div className={css.wrapper}>
       <div className={css.form}>
-        <form className={css.filters} onSubmit={handleSubmit}>
+        <form className={css.filter onSubmit={handleSubmit}}>
           <h3 className={css.title}>Filters:</h3>
           {fields.map(({ name, placeholder, label, type = 'text' }) => (
             <div key={name} className={css.field}>
               <label className={css.label}>{label}</label>
               <input
+                key={name}
                 type={type}
                 name={name}
                 placeholder={placeholder}

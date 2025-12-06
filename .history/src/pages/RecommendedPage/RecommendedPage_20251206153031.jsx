@@ -7,20 +7,7 @@ import Dashboard from '../../components/Dashboard/Dashboard.jsx';
 import RecommendedBooks from '../../components/RecommendedBooks/RecommendedBooks.jsx';
 import { filtersForRecommended } from '../../components/FiltersBooks/filtersConfig.js';
 
-import {
-  selectRecommendedError,
-  selectRecommendedLoading,
-  selectRecommendedPage,
-  selectRecommendedTotalPages,
-} from '../../redux/books/selectors.js';
-
 import css from './RecommendedPage.module.css';
-import {
-  selectFilterAuthor,
-  selectFilterTitle,
-} from '../../redux/filters/selectors.js';
-import { clearCurrentBook } from '../../redux/books/slice.js';
-import { resetFilters } from '../../redux/filters/slice.js';
 
 const RecommendedPage = () => {
   const dispatch = useDispatch();
@@ -29,6 +16,7 @@ const RecommendedPage = () => {
   const isError = useSelector(selectRecommendedError);
   const page = useSelector(selectRecommendedPage);
   const totalPages = useSelector(selectRecommendedTotalPages);
+  const books = useSelector(selectRecommendedBooks);
 
   const title = useSelector(selectFilterTitle);
   const author = useSelector(selectFilterAuthor);
@@ -44,8 +32,6 @@ const RecommendedPage = () => {
 
   return (
     <div className={`container ${css.pageWrap}`}>
-      {isLoading && <Loader />}
-      {isError && <Error>Error! TryLater!</Error>}
       <Dashboard onFilter={handleFilter} fields={filtersForRecommended} />
       <RecommendedBooks />
     </div>

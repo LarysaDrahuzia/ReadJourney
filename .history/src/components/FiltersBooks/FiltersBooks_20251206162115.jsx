@@ -22,12 +22,13 @@ const FiltersBooks = ({ fields, onFilter }) => {
   return (
     <div className={css.wrapper}>
       <div className={css.form}>
-        <form className={css.filters} onSubmit={handleSubmit}>
+        <form className={css.filter onSubmit={handleSubmit}>
           <h3 className={css.title}>Filters:</h3>
           {fields.map(({ name, placeholder, label, type = 'text' }) => (
             <div key={name} className={css.field}>
               <label className={css.label}>{label}</label>
               <input
+                key={name}
                 type={type}
                 name={name}
                 placeholder={placeholder}

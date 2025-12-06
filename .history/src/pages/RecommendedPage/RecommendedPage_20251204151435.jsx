@@ -1,13 +1,14 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
+
 import Loader from '../../components/Loader/Loader.jsx';
 import Error from '../../components/Error/Error.jsx';
 import { fetchRecommendedBooks } from '../../redux/books/operations.js';
-import Dashboard from '../../components/Dashboard/Dashboard.jsx';
-import RecommendedBooks from '../../components/RecommendedBooks/RecommendedBooks.jsx';
+import FiltersBooks from '../../components/FiltersBooks/FiltersBooks.jsx';
 import { filtersForRecommended } from '../../components/FiltersBooks/filtersConfig.js';
 
 import {
+  selectRecommendedBooks,
   selectRecommendedError,
   selectRecommendedLoading,
   selectRecommendedPage,
@@ -29,6 +30,7 @@ const RecommendedPage = () => {
   const isError = useSelector(selectRecommendedError);
   const page = useSelector(selectRecommendedPage);
   const totalPages = useSelector(selectRecommendedTotalPages);
+  const books = useSelector(selectRecommendedBooks);
 
   const title = useSelector(selectFilterTitle);
   const author = useSelector(selectFilterAuthor);
@@ -44,10 +46,9 @@ const RecommendedPage = () => {
 
   return (
     <div className={`container ${css.pageWrap}`}>
-      {isLoading && <Loader />}
-      {isError && <Error>Error! TryLater!</Error>}
-      <Dashboard onFilter={handleFilter} fields={filtersForRecommended} />
-      <RecommendedBooks />
+      <FiltersBooks onFilter={handleFilter} fields={filtersForRecommended} />
+      <div className={css.recommendedBlok}>
+        
     </div>
   );
 };

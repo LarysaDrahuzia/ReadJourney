@@ -8,6 +8,7 @@ import RecommendedBooks from '../../components/RecommendedBooks/RecommendedBooks
 import { filtersForRecommended } from '../../components/FiltersBooks/filtersConfig.js';
 
 import {
+  selectRecommendedBooks,
   selectRecommendedError,
   selectRecommendedLoading,
   selectRecommendedPage,
@@ -29,6 +30,7 @@ const RecommendedPage = () => {
   const isError = useSelector(selectRecommendedError);
   const page = useSelector(selectRecommendedPage);
   const totalPages = useSelector(selectRecommendedTotalPages);
+  const books = useSelector(selectRecommendedBooks);
 
   const title = useSelector(selectFilterTitle);
   const author = useSelector(selectFilterAuthor);
@@ -45,7 +47,7 @@ const RecommendedPage = () => {
   return (
     <div className={`container ${css.pageWrap}`}>
       {isLoading && <Loader />}
-      {isError && <Error>Error! TryLater!</Error>}
+      {isError && <Error>Error! </Error>}
       <Dashboard onFilter={handleFilter} fields={filtersForRecommended} />
       <RecommendedBooks />
     </div>

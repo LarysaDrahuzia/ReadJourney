@@ -5,8 +5,9 @@ import FunctionalDescription from '../FunctionalDescription/FunctionalDescriptio
 import QuoteBlock from '../QuoteBlock/QuoteBlock.jsx';
 
 import css from './Dashboard.module.css';
+import { fields } from '@hookform/resolvers/ajv/src/__tests__/__fixtures__/data.js';
 
-const Dashboard = ({ onFilter, fields }) => {
+const Dashboard = () => {
   const { pathname } = useLocation();
 
   const isRecommendedPage = pathname === '/recommended';

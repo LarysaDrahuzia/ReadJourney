@@ -8,6 +8,7 @@ import RecommendedBooks from '../../components/RecommendedBooks/RecommendedBooks
 import { filtersForRecommended } from '../../components/FiltersBooks/filtersConfig.js';
 
 import {
+  selectRecommendedBooks,
   selectRecommendedError,
   selectRecommendedLoading,
   selectRecommendedPage,

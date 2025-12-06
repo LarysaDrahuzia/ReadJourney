@@ -6,7 +6,7 @@ import QuoteBlock from '../QuoteBlock/QuoteBlock.jsx';
 
 import css from './Dashboard.module.css';
 
-const Dashboard = ({ onFilter, fields }) => {
+const Dashboard = () => {
   const { pathname } = useLocation();
 
   const isRecommendedPage = pathname === '/recommended';

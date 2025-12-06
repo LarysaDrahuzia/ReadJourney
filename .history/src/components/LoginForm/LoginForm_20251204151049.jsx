@@ -51,6 +51,7 @@ const LoginForm = () => {
       reset();
       navigate('/recommended');
     } catch (error) {
+      // console.error('log in error payload:', error);
       const msg =
         typeof error === 'string' ? error : error?.message || 'Log in failed';
       setError('email', { type: 'server', message: msg });

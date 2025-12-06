@@ -1,12 +1,12 @@
 import { useLocation } from 'react-router-dom';
 import FiltersBooks from '../FiltersBooks/FiltersBooks.jsx';
-// import AddBook from '../AddBook/AddBook.jsx';
+import AddBook from '../AddBook/AddBook.jsx';
 import FunctionalDescription from '../FunctionalDescription/FunctionalDescription.jsx';
 import QuoteBlock from '../QuoteBlock/QuoteBlock.jsx';
-
+import RecommendedBooks from '../RecommendedBooks/RecommendedBooks.jsx';
 import css from './Dashboard.module.css';
 
-const Dashboard = ({ onFilter, fields }) => {
+const Dashboard = () => {
   const { pathname } = useLocation();
 
   const isRecommendedPage = pathname === '/recommended';
@@ -16,14 +16,18 @@ const Dashboard = ({ onFilter, fields }) => {
     <aside className={css.dashboard}>
       {isRecommendedPage && (
         <>
-          <FiltersBooks fields={fields} onFilter={onFilter} />
+          <FiltersBooks />
           <FunctionalDescription />
-
           <QuoteBlock />
         </>
       )}
 
-      {isLibraryPage && <>{/* <AddBook /> */}</>}
+      {isLibraryPage && (
+        <>
+          <AddBook />
+          <RecommendedBooks />
+        </>
+      )}
     </aside>
   );
 };

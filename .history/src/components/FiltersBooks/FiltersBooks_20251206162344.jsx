@@ -28,6 +28,7 @@ const FiltersBooks = ({ fields, onFilter }) => {
             <div key={name} className={css.field}>
               <label className={css.label}>{label}</label>
               <input
+                key={name}
                 type={type}
                 name={name}
                 placeholder={placeholder}
