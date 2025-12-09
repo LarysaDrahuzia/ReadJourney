@@ -1,0 +1,14 @@
+.carsWrap {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 48px 32px;
+  padding: 0;
+  margin: 0;
+  align-items: center;
+  justify-content: center;
+}

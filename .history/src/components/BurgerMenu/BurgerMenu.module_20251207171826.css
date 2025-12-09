@@ -1,0 +1,90 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  width: 200px;
+  background-color: #262626;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.menu {
+  width: 90%;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 34px;
+  right: 40px;
+  background: none;
+  border: none;
+
+  cursor: pointer;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin-top: 280px;
+}
+
+.link {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  font-weight: 500;
+  color: #686868;
+  text-align: left;
+  font-size: 14px;
+  line-height: 18px;
+  transition: color 0.2s ease;
+}
+
+.link:hover {
+  color: #f9f9f9;
+  text-decoration: underline dotted #4f92f7;
+  /* text-decoration-thickness: 3px; */
+}
+
+.active {
+  color: #f9f9f9;
+  text-decoration: underline dotted #4f92f7 3px;
+
+  position: relative;
+}
+
+.active::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #fff;
+  border-radius: 2px;
+}
+
+.logoutBtn {
+  margin-top: 394px;
+  width: 91px;
+  padding: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}

@@ -1,0 +1,15 @@
+.block {
+}
+
+.subsection {
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  font-size: 20px;
+  line-height: 20px;
+  font-weight: 700;
+  margin-bottom: 34px;
+  margin-top: 40px;
+}

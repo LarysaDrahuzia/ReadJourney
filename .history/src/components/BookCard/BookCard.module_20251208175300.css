@@ -1,0 +1,112 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 137px;
+  /* gap: 8px; */
+}
+
+.thumb {
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 8px;
+}
+
+.image {
+  width: 137px;
+  height: 208px;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.thumb:hover .image {
+  transform: scale(1.03);
+}
+
+.titleRow {
+  text-align: left;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.author {
+  color: #888;
+}
+
+/* Modal styles */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.modal {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  max-width: 600px;
+  width: 90%;
+  position: relative;
+  animation: fadeIn 0.3s ease;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: none;
+  background: transparent;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.modalContent {
+  display: flex;
+  gap: 20px;
+}
+
+.modalImage {
+  width: 180px;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.modalInfo {
+  flex: 1;
+}
+
+.modalTitle {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.modalAuthor {
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.modalDesc {
+  margin-top: 12px;
+  color: #444;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
