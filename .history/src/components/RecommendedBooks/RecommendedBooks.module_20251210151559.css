@@ -27,22 +27,11 @@
 
 .btnPrev:disabled,
 .btnNext:disabled {
-  /* opacity: 0.3; */
+  opacity: 0.3;
   cursor: default;
 }
 
-.btnPrev:active,
-.btnNext:active {
-  transform: scale(0.92);
-}
-
-.icon .ring,
-.icon .arrow {
-  transition: stroke 0.3s ease;
-  stroke: rgba(249, 249, 249, 0.2);
-}
-
-.btnPrev:active .icon .arrow,
-.btnNext:active .icon .arrow {
-  stroke: #f9f9f9;
+.btnPrev:hover,
+.btnNext:hover {
+  color: #f9f9f9;
 }

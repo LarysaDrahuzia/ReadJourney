@@ -80,10 +80,9 @@ export const ChevronLeft = ({ className }) => {
         d="M31.5 16c0 8.56-6.94 15.5-15.5 15.5s-15.5-6.94-15.5-15.5c0-8.56 6.94-15.5 15.5-15.5s15.5 6.94 15.5 15.5z"
       ></path>
       <path
-        className="arrow"
-        stroke="rgba(249, 249, 249, 0.2)"
         strokeLinejoin="round"
         strokeLinecap="round"
+        strokeMiterlimit="4"
         strokeWidth="1.5"
         d="M18 20l-4-4 4-4"
       ></path>
@@ -91,29 +90,27 @@ export const ChevronLeft = ({ className }) => {
   );
 };
 
-export const ChevronRight = ({ className }) => {
+export const ChevronRight = () => {
   return (
     <svg
-      className={className}
       width="32"
       height="32"
       fill="none"
+      stroke="rgba(249, 249, 249, 0.2)"
       viewBox="0 0 32 32"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        className="ring"
-        stroke="rgba(249, 249, 249, 0.2)"
         strokeLinejoin="miter"
         strokeLinecap="butt"
+        strokeMiterlimit="4"
         strokeWidth="1"
         d="M31.5 16c0 8.56-6.94 15.5-15.5 15.5s-15.5-6.94-15.5-15.5c0-8.56 6.94-15.5 15.5-15.5s15.5 6.94 15.5 15.5z"
       ></path>
       <path
-        className="arrow"
-        stroke="rgba(249, 249, 249, 0.2)"
         strokeLinejoin="round"
         strokeLinecap="round"
+        strokeMiterlimit="4"
         strokeWidth="1.5"
         d="M14 12l4 4-4 4"
       ></path>

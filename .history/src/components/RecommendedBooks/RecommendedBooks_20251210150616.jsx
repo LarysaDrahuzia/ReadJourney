@@ -42,19 +42,19 @@ const RecommendedBooks = () => {
             disabled={currentIndex === 0}
             className={css.btnPrev}
           >
-            <ChevronLeft className={css.icon} />
+            <ChevronLeft />
           </button>
           <button
             type="button"
             onClick={handleNext}
-            disabled={currentIndex >= maxIndex}
+            disabled={currentIndex => maxIndex}
             className={css.btnNext}
           >
-            <ChevronRight className={css.icon} />
+            <ChevronRight />
           </button>
         </div>
       </div>
-      <BooksList books={visibleBooks} />
+      <BooksList books={books} />
     </div>
   );
 };

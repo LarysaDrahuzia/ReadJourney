@@ -114,6 +114,7 @@ export const ChevronRight = ({ className }) => {
         stroke="rgba(249, 249, 249, 0.2)"
         strokeLinejoin="round"
         strokeLinecap="round"
+        strokeMiterlimit="4"
         strokeWidth="1.5"
         d="M14 12l4 4-4 4"
       ></path>

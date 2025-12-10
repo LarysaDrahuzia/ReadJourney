@@ -28,33 +28,20 @@ const RecommendedBooks = () => {
     setCurrentIndex(prev => Math.max(prev - itemsPerPage, 0));
   };
 
-  // видима частина книги
-  const visibleBooks = books.slice(currentIndex, currentIndex + itemsPerPage);
-
   return (
     <div className={css.block}>
       <div className={css.subsection}>
         <h1 className={css.title}>Recommended</h1>
         <div className={css.btn}>
-          <button
-            type="button"
-            onClick={handlePrev}
-            disabled={currentIndex === 0}
-            className={css.btnPrev}
-          >
-            <ChevronLeft className={css.icon} />
+          <button type="button" className={css.btnPrev}>
+            <ChevronLeft />
           </button>
-          <button
-            type="button"
-            onClick={handleNext}
-            disabled={currentIndex >= maxIndex}
-            className={css.btnNext}
-          >
-            <ChevronRight className={css.icon} />
+          <button type="button" className={css.btnNext}>
+            <ChevronRight />
           </button>
         </div>
       </div>
-      <BooksList books={visibleBooks} />
+      <BooksList books={books} />
     </div>
   );
 };

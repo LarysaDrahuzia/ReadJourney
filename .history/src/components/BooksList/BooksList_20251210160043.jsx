@@ -4,12 +4,6 @@ import css from './BooksList.module.css';
 
 const BooksList = ({ books = [] }) => {
   const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setIsVisible(true), 30);
-    return () => clearTimeout(timer);
-  }, [books]);
-
   return (
     <div className={css.carsWrap}>
       <ul className={css.list}>

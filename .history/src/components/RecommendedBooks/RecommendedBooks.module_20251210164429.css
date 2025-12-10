@@ -42,7 +42,9 @@
   stroke: rgba(249, 249, 249, 0.2);
 }
 
+.btnPrev:active .icon .ring,
 .btnPrev:active .icon .arrow,
+.btnNext:active .icon .ring,
 .btnNext:active .icon .arrow {
   stroke: #f9f9f9;
 }

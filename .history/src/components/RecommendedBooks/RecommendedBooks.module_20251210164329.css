@@ -41,8 +41,3 @@
   transition: stroke 0.3s ease;
   stroke: rgba(249, 249, 249, 0.2);
 }
-
-.btnPrev:active .icon .arrow,
-.btnNext:active .icon .arrow {
-  stroke: #f9f9f9;
-}
