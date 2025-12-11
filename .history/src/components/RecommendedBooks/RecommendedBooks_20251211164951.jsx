@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
 import {
@@ -22,48 +21,27 @@ const RecommendedBooks = () => {
   const page = useSelector(selectRecommendedPage);
   const totalPages = useSelector(selectRecommendedTotalPages);
 
-  const [currentIndex, setCurrentIndex] = useState(0);
+  // const [currentIndex, setCurrentIndex] = useState(0);
 
   const isTablet = useMediaQuery({ minWidth: 768 });
   const isDesktop = useMediaQuery({ minWidth: 1440 });
 
   const itemsPerPage = isDesktop ? 10 : isTablet ? 8 : 2;
 
-  useEffect(() => {
-    setCurrentIndex(0);
-  }, [books]);
+  // // обмеження
+  // const maxIndex = Math.max(0, books.length - itemsPerPage);
 
-  // обробники кнопок
-  const handleNext = () => {
-    const nextIndex = currentIndex + itemsPerPage;
+  // // обробники кнопок
+  // const handleNext = () => {
+  //   setCurrentIndex(prev => Math.min(prev + itemsPerPage, maxIndex));
+  // };
 
-    if (nextIndex < books.length) {
-      // в межах поточної сторінки
-      setCurrentIndex(nextIndex);
-    } else {
-      // перехід на наступну сторінку бекенду
-      if (page < totalPages) {
-        dispatch(nextRecommendedPage());
-        setCurrentIndex(0);
-      }
-    }
-  };
+  // const handlePrev = () => {
+  //   setCurrentIndex(prev => Math.max(prev - itemsPerPage, 0));
+  // };
 
-  const handlePrev = () => {
-    const prevIndex = currentIndex - itemsPerPage;
-
-    if (prevIndex >= 0) {
-      setCurrentIndex(prevIndex);
-    } else {
-      if (page > 1) {
-        dispatch(prevRecommendedPage());
-        setCurrentIndex(0);
-      }
-    }
-  };
-
-  // видима частина книги
-  const visibleBooks = books.slice(currentIndex, currentIndex + itemsPerPage);
+  // // видима частина книги
+  const visibleBooks = books.slice(0, itemsPerPage);
 
   return (
     <div className={css.block}>
@@ -73,8 +51,8 @@ const RecommendedBooks = () => {
           <Button
             type="button"
             variant="icon"
-            onClick={handlePrev}
-            disabled={page === 1 && currentIndex === 0}
+            onClick={() => dispatch(prevRecommendedPage())}
+            disabled={page === 1}
             className={css.btnPrev}
           >
             <ChevronLeft />
@@ -82,10 +60,8 @@ const RecommendedBooks = () => {
           <Button
             type="button"
             variant="icon"
-            onClick={handleNext}
-            disabled={
-              page === totalPages && currentIndex + itemsPerPage >= books.length
-            }
+            onClick={() => dispatch(nextRecommendedPage())}
+            disabled={page === totalPages}
             className={css.btnNext}
           >
             <ChevronRight />

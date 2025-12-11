@@ -43,8 +43,7 @@ const RecommendedBooks = () => {
     } else {
       // перехід на наступну сторінку бекенду
       if (page < totalPages) {
-        dispatch(nextRecommendedPage());
-        setCurrentIndex(0);
+        dispatch(nextRecommendedPage);
       }
     }
   };
@@ -57,13 +56,12 @@ const RecommendedBooks = () => {
     } else {
       if (page > 1) {
         dispatch(prevRecommendedPage());
-        setCurrentIndex(0);
       }
     }
   };
 
   // видима частина книги
-  const visibleBooks = books.slice(currentIndex, currentIndex + itemsPerPage);
+  const visibleBooks = books.slice(0, itemsPerPage);
 
   return (
     <div className={css.block}>
@@ -73,8 +71,8 @@ const RecommendedBooks = () => {
           <Button
             type="button"
             variant="icon"
-            onClick={handlePrev}
-            disabled={page === 1 && currentIndex === 0}
+            onClick={() => dispatch(prevRecommendedPage())}
+            disabled={page === 1}
             className={css.btnPrev}
           >
             <ChevronLeft />
@@ -82,10 +80,8 @@ const RecommendedBooks = () => {
           <Button
             type="button"
             variant="icon"
-            onClick={handleNext}
-            disabled={
-              page === totalPages && currentIndex + itemsPerPage >= books.length
-            }
+            onClick={() => dispatch(nextRecommendedPage())}
+            disabled={page === totalPages}
             className={css.btnNext}
           >
             <ChevronRight />

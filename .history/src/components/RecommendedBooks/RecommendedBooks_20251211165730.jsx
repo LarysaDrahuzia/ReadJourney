@@ -33,37 +33,20 @@ const RecommendedBooks = () => {
     setCurrentIndex(0);
   }, [books]);
 
-  // обробники кнопок
-  const handleNext = () => {
-    const nextIndex = currentIndex + itemsPerPage;
+  // // обмеження
+  // const maxIndex = Math.max(0, books.length - itemsPerPage);
 
-    if (nextIndex < books.length) {
-      // в межах поточної сторінки
-      setCurrentIndex(nextIndex);
-    } else {
-      // перехід на наступну сторінку бекенду
-      if (page < totalPages) {
-        dispatch(nextRecommendedPage());
-        setCurrentIndex(0);
-      }
-    }
-  };
+  // // обробники кнопок
+  // const handleNext = () => {
+  //   setCurrentIndex(prev => Math.min(prev + itemsPerPage, maxIndex));
+  // };
 
-  const handlePrev = () => {
-    const prevIndex = currentIndex - itemsPerPage;
+  // const handlePrev = () => {
+  //   setCurrentIndex(prev => Math.max(prev - itemsPerPage, 0));
+  // };
 
-    if (prevIndex >= 0) {
-      setCurrentIndex(prevIndex);
-    } else {
-      if (page > 1) {
-        dispatch(prevRecommendedPage());
-        setCurrentIndex(0);
-      }
-    }
-  };
-
-  // видима частина книги
-  const visibleBooks = books.slice(currentIndex, currentIndex + itemsPerPage);
+  // // видима частина книги
+  const visibleBooks = books.slice(0, itemsPerPage);
 
   return (
     <div className={css.block}>
@@ -73,8 +56,8 @@ const RecommendedBooks = () => {
           <Button
             type="button"
             variant="icon"
-            onClick={handlePrev}
-            disabled={page === 1 && currentIndex === 0}
+            onClick={() => dispatch(prevRecommendedPage())}
+            disabled={page === 1}
             className={css.btnPrev}
           >
             <ChevronLeft />
@@ -82,10 +65,8 @@ const RecommendedBooks = () => {
           <Button
             type="button"
             variant="icon"
-            onClick={handleNext}
-            disabled={
-              page === totalPages && currentIndex + itemsPerPage >= books.length
-            }
+            onClick={() => dispatch(nextRecommendedPage())}
+            disabled={page === totalPages}
             className={css.btnNext}
           >
             <ChevronRight />

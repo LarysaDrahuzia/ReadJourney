@@ -43,8 +43,7 @@ const RecommendedBooks = () => {
     } else {
       // перехід на наступну сторінку бекенду
       if (page < totalPages) {
-        dispatch(nextRecommendedPage());
-        setCurrentIndex(0);
+        dispatch(nextRecommendedPage);
       }
     }
   };
@@ -57,7 +56,6 @@ const RecommendedBooks = () => {
     } else {
       if (page > 1) {
         dispatch(prevRecommendedPage());
-        setCurrentIndex(0);
       }
     }
   };

@@ -39,11 +39,6 @@ const sliceBooks = createSlice({
         state.recommended.page += 1;
       }
     },
-    prevRecommendedPage(state) {
-      if (state.recommended.page > 1) {
-        state.recommended.page -= 1;
-      }
-    },
   },
   extraReducers: builder => {
     builder
@@ -92,7 +87,6 @@ const sliceBooks = createSlice({
   },
 });
 
-export const { clearCurrentBook, nextRecommendedPage, prevRecommendedPage } =
-  sliceBooks.actions;
+export const { clearCurrentBook } = sliceBooks.actions;
 
 export default sliceBooks.reducer;

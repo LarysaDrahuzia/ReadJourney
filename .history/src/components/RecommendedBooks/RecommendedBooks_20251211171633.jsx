@@ -57,7 +57,6 @@ const RecommendedBooks = () => {
     } else {
       if (page > 1) {
         dispatch(prevRecommendedPage());
-        setCurrentIndex(0);
       }
     }
   };

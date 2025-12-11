@@ -15,6 +15,10 @@ import {
 } from '../../redux/books/selectors.js';
 
 import css from './RecommendedPage.module.css';
+import {
+  selectFilterAuthor,
+  selectFilterTitle,
+} from '../../redux/filters/selectors.js';
 
 const RecommendedPage = () => {
   const dispatch = useDispatch();
@@ -24,11 +28,15 @@ const RecommendedPage = () => {
   const page = useSelector(selectRecommendedPage);
   const totalPages = useSelector(selectRecommendedTotalPages);
 
+  const title = useSelector(selectFilterTitle);
+  const author = useSelector(selectFilterAuthor);
+
   useEffect(() => {
-    dispatch(fetchRecommendedBooks({ page }));
-  }, [dispatch, page]);
+    dispatch(fetchRecommendedBooks({ page, title, author }));
+  }, [dispatch, page, title, author]);
 
   const handleFilter = filters => {
+    dispatch(resetFilters());
     dispatch(fetchRecommendedBooks({ page: 1, ...filters }));
   };
 

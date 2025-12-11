@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import {
   nextRecommendedPage,
@@ -16,11 +16,7 @@ import Button from '../Button/Button.jsx';
 import css from './RecommendedBooks.module.css';
 
 const RecommendedBooks = () => {
-  const dispatch = useDispatch();
-
   const books = useSelector(selectRecommendedBooks);
-  const page = useSelector(selectRecommendedPage);
-  const totalPages = useSelector(selectRecommendedTotalPages);
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -29,37 +25,16 @@ const RecommendedBooks = () => {
 
   const itemsPerPage = isDesktop ? 10 : isTablet ? 8 : 2;
 
-  useEffect(() => {
-    setCurrentIndex(0);
-  }, [books]);
+  // обмеження
+  const maxIndex = Math.max(0, books.length - itemsPerPage);
 
   // обробники кнопок
   const handleNext = () => {
-    const nextIndex = currentIndex + itemsPerPage;
-
-    if (nextIndex < books.length) {
-      // в межах поточної сторінки
-      setCurrentIndex(nextIndex);
-    } else {
-      // перехід на наступну сторінку бекенду
-      if (page < totalPages) {
-        dispatch(nextRecommendedPage());
-        setCurrentIndex(0);
-      }
-    }
+    setCurrentIndex(prev => Math.min(prev + itemsPerPage, maxIndex));
   };
 
   const handlePrev = () => {
-    const prevIndex = currentIndex - itemsPerPage;
-
-    if (prevIndex >= 0) {
-      setCurrentIndex(prevIndex);
-    } else {
-      if (page > 1) {
-        dispatch(prevRecommendedPage());
-        setCurrentIndex(0);
-      }
-    }
+    setCurrentIndex(prev => Math.max(prev - itemsPerPage, 0));
   };
 
   // видима частина книги
@@ -74,21 +49,19 @@ const RecommendedBooks = () => {
             type="button"
             variant="icon"
             onClick={handlePrev}
-            disabled={page === 1 && currentIndex === 0}
+            disabled={currentIndex === 0}
             className={css.btnPrev}
           >
-            <ChevronLeft />
+            <ChevronLeft className={css.icon} />
           </Button>
           <Button
             type="button"
             variant="icon"
             onClick={handleNext}
-            disabled={
-              page === totalPages && currentIndex + itemsPerPage >= books.length
-            }
+            disabled={currentIndex >= maxIndex}
             className={css.btnNext}
           >
-            <ChevronRight />
+            <ChevronRight className={css.icon} />
           </Button>
         </div>
       </div>

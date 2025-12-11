@@ -1,6 +1,11 @@
 .container {
   margin-bottom: 40px;
+  padding: 20px;
 }
+
+/* .logo {
+  padding: 20px;
+} */
 
 .logoText {
   display: none;

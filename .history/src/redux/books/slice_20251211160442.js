@@ -34,16 +34,6 @@ const sliceBooks = createSlice({
     clearCurrentBook(state) {
       state.currentBook.data = null;
     },
-    nextRecommendedPage(state) {
-      if (state.recommended.page < state.recommended.totalPages) {
-        state.recommended.page += 1;
-      }
-    },
-    prevRecommendedPage(state) {
-      if (state.recommended.page > 1) {
-        state.recommended.page -= 1;
-      }
-    },
   },
   extraReducers: builder => {
     builder
@@ -57,7 +47,7 @@ const sliceBooks = createSlice({
 
         state.recommended.items = action.payload.results;
         state.recommended.totalPages = action.payload.totalPages;
-        state.recommended.page = action.payload.page;
+        state.recommended.page = action.meta.arg?.page || 1;
       })
       .addCase(fetchRecommendedBooks.rejected, (state, action) => {
         state.recommended.isLoading = false;
@@ -92,7 +82,6 @@ const sliceBooks = createSlice({
   },
 });
 
-export const { clearCurrentBook, nextRecommendedPage, prevRecommendedPage } =
-  sliceBooks.actions;
+export const { clearCurrentBook } = sliceBooks.actions;
 
 export default sliceBooks.reducer;

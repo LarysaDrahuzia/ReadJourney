@@ -27,9 +27,6 @@ export const fetchRecommendedBooks = createAsyncThunk(
           query,
         },
       });
-
-      console.log('Fetching recommended ->', page, title, author);
-
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(

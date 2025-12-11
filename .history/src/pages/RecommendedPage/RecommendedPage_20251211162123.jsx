@@ -15,6 +15,10 @@ import {
 } from '../../redux/books/selectors.js';
 
 import css from './RecommendedPage.module.css';
+import {
+  selectFilterAuthor,
+  selectFilterTitle,
+} from '../../redux/filters/selectors.js';
 
 const RecommendedPage = () => {
   const dispatch = useDispatch();

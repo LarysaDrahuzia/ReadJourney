@@ -92,7 +92,6 @@ const sliceBooks = createSlice({
   },
 });
 
-export const { clearCurrentBook, nextRecommendedPage, prevRecommendedPage } =
-  sliceBooks.actions;
+export const { clearCurrentBook } = sliceBooks.actions;
 
 export default sliceBooks.reducer;
