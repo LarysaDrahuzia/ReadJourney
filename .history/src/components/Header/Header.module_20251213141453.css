@@ -1,0 +1,33 @@
+.header {
+  padding: 10px 0;
+}
+
+.pageWrap {
+  background-color: #1f1f1f;
+  width: 100%;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  justify-content: space-between;
+}
+
+.mobileHeader {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+}
+
+.burgerBtn {
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .burgerBtn {
+    display: none;
+  }
+}

@@ -1,0 +1,83 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: flex-end;
+  z-index: 2000;
+}
+
+.menu {
+  width: 200px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  animation: clideIn 0.25s ease-out;
+  background-color: #262626;
+  padding: 40px 20px;
+}
+
+@keyframes clideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.closeBtn {
+  position: absolute;
+  top: 34px;
+  right: 40px;
+  background: none;
+  border: none;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+
+  margin: 0 auto;
+  gap: 20px;
+  margin-top: 280px;
+}
+
+.link {
+  position: relative;
+  display: inline-block;
+  font-weight: 500;
+  color: #686868;
+  padding-bottom: 6px;
+  font-size: 14px;
+  line-height: 18px;
+  /* transition: color 0.2s ease; */
+}
+
+.link:hover {
+  color: #f9f9f9;
+}
+
+.active {
+  color: #f9f9f9;
+}
+
+.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #4f92f7;
+  border-radius: 2px;
+}
+
+.logoutBtn {
+  margin-top: auto;
+  width: 91px;
+  padding: 10px;
+  align-self: center;
+  transition: all 0.2s ease;
+}

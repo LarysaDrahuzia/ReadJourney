@@ -1,0 +1,40 @@
+.userBar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background-color: #262626;
+  border: 1px solid rgba(249, 249, 249, 0.2);
+  /* color: #f9f9f9;
+  font-size: 16px;
+  line-height: 16px;
+  letter-spacing: -0.02em;
+  font-weight: 700; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+}
+
+.name {
+  color: #f9f9f9;
+  font-size: 16px;
+  line-height: 16px;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+
+.logout {
+  display: none;
+}
+
+/* @media (max-width: 1439px) {
+  .name {
+    display: none;
+  }
+} */

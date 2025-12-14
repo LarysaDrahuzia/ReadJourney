@@ -1,0 +1,25 @@
+.header {
+  background-color: #1f1f1f;
+  width: 100%;
+  border-radius: 15px;
+  padding: 10px 0;
+}
+
+.pageWrap {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.burgerBtn {
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .burgerBtn {
+    display: none;
+  }
+}
