@@ -1,0 +1,47 @@
+.block {
+  background-color: #1f1f1f;
+  border-radius: 30px;
+  width: 335px;
+  padding: 20px;
+}
+
+.subsection {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: 20px;
+  line-height: 20px;
+  font-weight: 700;
+  margin-bottom: 34px;
+  margin-top: 20px;
+  margin-right: 87px;
+}
+
+.btn {
+  display: flex;
+  gap: 8px;
+}
+
+.btnPrev:disabled,
+.btnNext:disabled {
+  cursor: default;
+  color: rgba(249, 249, 249, 0.2);
+}
+
+.arrow {
+  transition: stroke 0.3s ease;
+  color: rgba(249, 249, 249, 0.2);
+}
+
+.btnPrev:hover .arrow,
+.btnNext:hover .arrow {
+  color: #f9f9f9;
+}
+
+/* .btnPrev:disabled .arrow,
+.btnNext:disabled .arrow {
+  color: rgba(249, 249, 249, 0.2);
+} */

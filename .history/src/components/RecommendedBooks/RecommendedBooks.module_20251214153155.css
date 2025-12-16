@@ -1,0 +1,48 @@
+.block {
+  background-color: #1f1f1f;
+  border-radius: 30px;
+  width: 335px;
+  padding: 20px;
+}
+
+.subsection {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: 20px;
+  line-height: 20px;
+  font-weight: 700;
+  margin-bottom: 34px;
+  margin-top: 20px;
+  margin-right: 87px;
+}
+
+.btn {
+  display: flex;
+  gap: 8px;
+}
+
+.btnPrev:disabled,
+.btnNext:disabled {
+  /* opacity: 0.3; */
+  cursor: default;
+}
+
+.btnPrev:active,
+.btnNext:active {
+  transform: scale(0.92);
+}
+
+.icon .ring,
+.icon .arrow {
+  transition: stroke 0.3s ease;
+  stroke: rgba(249, 249, 249, 0.2);
+}
+
+.btnPrev:hover .icon .arrow,
+.btnNext:hover .icon .arrow {
+  stroke: #f9f9f9;
+}
