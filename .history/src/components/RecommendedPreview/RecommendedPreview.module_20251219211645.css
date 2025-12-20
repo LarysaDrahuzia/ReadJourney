@@ -1,0 +1,7 @@
+.preview {
+  display: flex;
+  flex-direction: column;
+  background-color: 262626;
+  border-radius: 12px;
+  padding: 20px;
+}

@@ -1,0 +1,13 @@
+.preview {
+  display: flex;
+  flex-direction: column;
+  background-color: #262626;
+  border-radius: 12px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 18px;
+  color: #e3e3e3;
+}

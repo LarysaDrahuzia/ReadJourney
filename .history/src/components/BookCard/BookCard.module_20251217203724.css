@@ -1,0 +1,149 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 137px;
+  height: 248px;
+  position: relative;
+}
+
+.thumb {
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 8px;
+}
+
+.image {
+  width: 137px;
+  height: 208px;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.thumb:hover .image {
+  transform: scale(1.03);
+}
+
+.title {
+  white-space: nowrap; /* забороняє перенос рядка */
+  overflow: hidden; /* ховає зайвий текст */
+  text-overflow: ellipsis; /* додає ... */
+}
+
+.title {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 18px;
+  margin-bottom: 2px;
+}
+
+.author {
+  color: #686868;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 12px;
+}
+
+/* Modal styles */
+.backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 999;
+}
+
+.modal {
+  padding: 20px;
+  max-width: 600px;
+  animation: fadeIn 0.3s ease;
+  background: #1f1f1f;
+  border-radius: 12px;
+  border-style: solid;
+  border-color: rgba(104, 104, 104, 0.2);
+  border-width: 1px;
+  width: 335px;
+  height: 421px;
+
+  left: 50%;
+  translate: -50%;
+  top: 0px;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  border: none;
+  background: transparent;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.icon {
+  width: 22px;
+  height: 22px;
+}
+
+.modalContent {
+  display: flex;
+  gap: 20px;
+}
+
+.modalImage {
+  width: 140px;
+  height: 213px;
+  object-fit: cover;
+  /* border-radius: 8px; */
+}
+
+.modalInfo {
+  flex: 1;
+}
+
+.modalTitle {
+  font-size: 18px;
+  line-height: 18px;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.modalAuthor {
+  color: #686868;
+  font-size: 12px;
+  line-height: 14px;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.pages {
+  font-size: 10px;
+  line-height: 12px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.btnAddBook {
+  width: 141px;
+  padding: 12px;
+}
+
+/* .modalDesc {
+  margin-top: 12px;
+  color: #444;
+} */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
