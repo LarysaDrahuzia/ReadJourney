@@ -19,6 +19,8 @@
   height: 100px;
   background-color: #262626;
   border-radius: 50%;
+  width: 100px;
+  height: 100px;
   position: absolute;
 }
 

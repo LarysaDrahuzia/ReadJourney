@@ -2,17 +2,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import Select from 'react-select';
 import { customStyles } from '../CustomSelect/selectConfig.js';
 import { selectFilterStatus } from '../../redux/filters/selectors.js';
-import { setFilters } from '../../redux/filters/slice.js';
 import css from './MyLibraryBooks.module.css';
 
 const statusReadingBook = [
-  { value: 'all_books', label: 'All books' },
   { value: 'unread', label: 'Unread' },
   { value: 'in_progress', label: 'In progress' },
   { value: 'done', label: 'Done' },
+  { value: 'all_books', label: 'All books' },
 ];
 
-const MyLibraryBooks = ({ statusOptions = statusReadingBook }) => {
+const MyLibraryBooks = ({ onFilter, statusReadingBook }) => {
   const dispatch = useDispatch();
 
   const status = useSelector(selectFilterStatus);
@@ -22,35 +21,22 @@ const MyLibraryBooks = ({ statusOptions = statusReadingBook }) => {
       ? statusOptions
       : statusOptions.map(v => ({ label: v, value: v }));
 
-  const statusValue =
-    statusOpts.find(option => option.value === status) || null;
-
   return (
     <div className={css.wrapper}>
       <div className={css.selectFilter}>
         <h1 className={css.title}>My library</h1>
         <Select
-          options={statusOpts}
-          value={statusValue}
-          onChange={option =>
-            dispatch(setFilters({ status: option ? option.value : null }))
-          }
-          placeholder="All books"
-          isSearchable={false}
+          options={levelOpts}
+          value={levelValue}
+          onChange={opt => dispatch(setFilters({ levels: opt?.value || '' }))}
+          placeholder="Choose a level"
+          isSearchable
+          getOptionValue={o => String(o.value)}
+          getOptionLabel={o => String(o.label)}
           styles={customStyles}
           classNamePrefix="custom-select"
           isClearable
         />
-      </div>
-      <div className={css.listBooks}>
-        <button type="button" className={css.btnRead}>
-          <img src="/books.jpg" alt="Books" width={50} height={50} />
-        </button>
-        <p className={css.text}>
-          To start reading, add{' '}
-          <span className={css.part}>some of your books</span> or from the
-          recommended ones
-        </p>
       </div>
     </div>
   );

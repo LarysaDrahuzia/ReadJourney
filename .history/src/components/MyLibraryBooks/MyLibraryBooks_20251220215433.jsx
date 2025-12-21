@@ -6,13 +6,13 @@ import { setFilters } from '../../redux/filters/slice.js';
 import css from './MyLibraryBooks.module.css';
 
 const statusReadingBook = [
-  { value: 'all_books', label: 'All books' },
   { value: 'unread', label: 'Unread' },
   { value: 'in_progress', label: 'In progress' },
   { value: 'done', label: 'Done' },
+  { value: 'all_books', label: 'All books' },
 ];
 
-const MyLibraryBooks = ({ statusOptions = statusReadingBook }) => {
+const MyLibraryBooks = ({ onFilter, statusOptions = statusReadingBook }) => {
   const dispatch = useDispatch();
 
   const status = useSelector(selectFilterStatus);
@@ -22,8 +22,7 @@ const MyLibraryBooks = ({ statusOptions = statusReadingBook }) => {
       ? statusOptions
       : statusOptions.map(v => ({ label: v, value: v }));
 
-  const statusValue =
-    statusOpts.find(option => option.value === status) || null;
+  const statusValue = statusOpts.filter(o => status.includes(o.value));
 
   return (
     <div className={css.wrapper}>
@@ -32,11 +31,11 @@ const MyLibraryBooks = ({ statusOptions = statusReadingBook }) => {
         <Select
           options={statusOpts}
           value={statusValue}
-          onChange={option =>
-            dispatch(setFilters({ status: option ? option.value : null }))
-          }
+          onChange={opt => dispatch(setFilters({ status: opt?.value || '' }))}
           placeholder="All books"
-          isSearchable={false}
+          isSearchable
+          getOptionValue={o => String(o.value)}
+          getOptionLabel={o => String(o.label)}
           styles={customStyles}
           classNamePrefix="custom-select"
           isClearable
@@ -44,7 +43,7 @@ const MyLibraryBooks = ({ statusOptions = statusReadingBook }) => {
       </div>
       <div className={css.listBooks}>
         <button type="button" className={css.btnRead}>
-          <img src="/books.jpg" alt="Books" width={50} height={50} />
+          <img src="/books.jpg" alt="Books" />
         </button>
         <p className={css.text}>
           To start reading, add{' '}

@@ -14,14 +14,6 @@
   font-weight: 700;
 }
 
-.btnRead {
-  width: 100px;
-  height: 100px;
-  background-color: #262626;
-  border-radius: 50%;
-  position: absolute;
-}
-
 .text {
   font-size: 14px;
   line-height: 18px;

@@ -44,7 +44,7 @@ const MyLibraryBooks = ({ statusOptions = statusReadingBook }) => {
       </div>
       <div className={css.listBooks}>
         <button type="button" className={css.btnRead}>
-          <img src="/books.jpg" alt="Books" width={50} height={50} />
+          <img src="/books.jpg" alt="Books" />
         </button>
         <p className={css.text}>
           To start reading, add{' '}
