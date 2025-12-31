@@ -1,0 +1,46 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  background-color: #1f1f1f;
+  border-radius: 30px;
+  padding: 20px;
+  min-height: 300px;
+}
+
+.selectFilter {
+  display: flex;
+  justify-content: space-between;
+  /* margin-top: 20px; */
+}
+
+.title {
+  color: #f9f9f9;
+  font-size: 20px;
+  line-height: 20px;
+  font-weight: 700;
+  /* margin-right: 87px; */
+}
+
+.listBooks {
+  margin-top: 63px;
+  position: relative;
+}
+
+.btnRead {
+  width: 100px;
+  height: 100px;
+  background-color: #262626;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.text {
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 500;
+  color: #f9f9f9;
+}
+
+.part {
+  color: #686868;
+}
