@@ -1,0 +1,32 @@
+import { createSelector } from '@reduxjs/toolkit';
+
+//  Recommended
+export const selectRecommendedBooks = state => state.books.recommended.items;
+export const selectRecommendedPage = state => state.books.recommended.page;
+export const selectRecommendedTotalPages = state =>
+  state.books.recommended.totalPages;
+export const selectRecommendedLoading = state =>
+  state.books.recommended.isLoading;
+export const selectRecommendedError = state => state.books.recommended.error;
+
+//  My Library
+export const selectMyLibraryBooks = state => state.books.myLibrary.items ?? [];
+export const selectMyLibraryIds = createSelector(
+  [selectMyLibraryBooks],
+  items => items.map(book => book._id)
+);
+export const selectMyLibraryPage = state => state.books.myLibrary.page;
+export const selectMyLibraryTotalPages = state =>
+  state.books.myLibrary.totalPages;
+export const selectMyLibraryLoading = state => state.books.myLibrary.isLoading;
+export const selectMyLibraryError = state => state.books.myLibrary.error;
+
+//  Current book
+export const selectCurrentBook = state => state.books.currentBook.data;
+export const selectCurrentBookLoading = state =>
+  state.books.currentBook.isLoading;
+export const selectCurrentBookError = state => state.books.currentBook.error;
+
+//  Add book
+export const selectAddBookLoading = state => state.books.addBook.isLoading;
+export const selectAddBookError = state => state.books.addBook.error;
