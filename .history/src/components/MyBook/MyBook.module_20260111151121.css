@@ -1,0 +1,30 @@
+.wrapper {
+  background-color: #1f1f1f;
+  border-radius: 30px;
+  width: 335px;
+  padding: 40px 20px;
+}
+
+.pageTitle {
+  font-size: 20px;
+  line-height: 20px;
+  font-weight: 700;
+}
+
+.signStart {
+  width: 40px;
+  height: 40px;
+  position: relative;
+}
+
+.round;
+
+.circle {
+  background: #e90516;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  left: 5px;
+  top: 5px;
+}

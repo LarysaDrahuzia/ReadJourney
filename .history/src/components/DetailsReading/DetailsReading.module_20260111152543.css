@@ -1,0 +1,17 @@
+.details {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 18px;
+  line-height: 18px;
+  font-weight: 700;
+}
+
+.text {
+  color: #686868;
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 500;
+}

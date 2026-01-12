@@ -1,0 +1,46 @@
+import { useSelector } from 'react-redux';
+import { selectReadingStatistics } from '../../redux/books/selectors';
+import css from './Statistics.module.css';
+
+const Statistics = () => {
+  const stats = useSelector(selectReadingStatistics);
+
+  if (!stats) return null;
+
+  const { totalPages, readPages, totalTime, averageSpeed, progress } = stats;
+
+  return (
+    <div className={css.statistics}>
+      <h3 className={css.title}>Statistics</h3>
+
+      <ul className={css.list}>
+        <li>
+          <span>Total pages:</span>
+          <span>{totalPages}</span>
+        </li>
+
+        <li>
+          <span>Read pages:</span>
+          <span>{readPages}</span>
+        </li>
+
+        <li>
+          <span>Total time:</span>
+          <span>{totalTime} min</span>
+        </li>
+
+        <li>
+          <span>Avg speed:</span>
+          <span>{averageSpeed} p/min</span>
+        </li>
+
+        <li>
+          <span>Progress:</span>
+          <span>{progress}%</span>
+        </li>
+      </ul>
+    </div>
+  );
+};
+
+export default Statistics;
