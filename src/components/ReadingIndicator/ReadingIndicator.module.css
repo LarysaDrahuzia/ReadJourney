@@ -1,0 +1,36 @@
+.signStart,
+.signProgress {
+  width: 40px;
+  height: 40px;
+  position: relative;
+}
+
+.round {
+  border-radius: 50%;
+  border-style: solid;
+  border-color: #f9f9f9;
+  border-width: 2px;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
+
+.circle {
+  background-color: #e90516;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  left: 5px;
+  top: 5px;
+}
+
+.square {
+  background-color: #e90516;
+  border-radius: 3px;
+  width: 15px;
+  height: 15px;
+  position: absolute;
+}

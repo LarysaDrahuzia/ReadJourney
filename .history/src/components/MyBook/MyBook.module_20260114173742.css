@@ -1,0 +1,53 @@
+.wrapper {
+  background-color: #1f1f1f;
+  border-radius: 30px;
+  width: 335px;
+  padding: 40px 20px;
+}
+
+.pageTitle {
+  font-size: 20px;
+  line-height: 20px;
+  font-weight: 700;
+  margin-bottom: 40px;
+}
+
+.book {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.image {
+  border-radius: 8px;
+  flex-shrink: 0;
+  width: 137px;
+  height: 208px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+/* .info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+} */
+
+.title {
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 700;
+  width: 137px;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.author {
+  color: #686868;
+  text-align: center;
+  font-size: 10px;
+  line-height: 12px;
+  font-weight: 500;
+}

@@ -1,0 +1,15 @@
+.wrapper {
+  background-color: #1f1f1f;
+  border-radius: 30px;
+  width: 335px;
+  padding: 40px 20px;
+}
+
+.pageTitle {
+  font-size: 20px;
+  line-height: 20px;
+  font-weight: 700;
+}
+
+.book {
+}
