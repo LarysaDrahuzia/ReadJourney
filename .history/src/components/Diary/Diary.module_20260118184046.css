@@ -1,0 +1,25 @@
+.premier {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.icon {
+  margin-right: 8px;
+}
+
+.title {
+  font-size: 18px;
+  line-height: 18px;
+  font-weight: 700;
+}
+
+.list {
+  background-color: #262626;
+  border-radius: 12px;
+  width: 295px;
+}
+
+.row {
+  display: flex;
+}

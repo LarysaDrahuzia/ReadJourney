@@ -1,0 +1,14 @@
+.premier {
+  display: flex;
+  justify-content: space-between;
+}
+
+.icon {
+  margin-right: 8px;
+}
+
+.title {
+  font-size: 18px;
+  line-height: 18px;
+  font-weight: 700;
+}

@@ -1,0 +1,39 @@
+import { useSelector } from 'react-redux';
+import {
+  selectCurrentBookStatus,
+  selectReadingProgress,
+  selectReadingStatistics,
+  selectReadingTimeLeft,
+} from '../../redux/books/selectors.js';
+
+import Diary from '../Diary/Diary.jsx';
+import EmptyProgress from '../EmptyProgress/EmptyProgress.jsx';
+import Statistics from '../Statistics/Statistics.jsx';
+
+// import css from './DetailsReading.module.css';
+
+const DetailsReading = () => {
+  const status = useSelector(selectCurrentBookStatus);
+  const progress = useSelector(selectReadingProgress);
+  const statistics = useSelector(selectReadingStatistics);
+  const timeLeftToRead = useSelector(selectReadingTimeLeft);
+
+  if (!book) return null;
+
+  const status = book.status;
+
+  if (status === 'unread') {
+    return <EmptyProgress />;
+  }
+
+  if (status === 'in-progress') {
+    return <Diary progress={progress} />;
+  }
+
+  if (status === 'done') {
+    return <Statistics />;
+  }
+  return null;
+};
+
+export default DetailsReading;
