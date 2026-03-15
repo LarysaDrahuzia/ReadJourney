@@ -1,0 +1,111 @@
+.premier {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.icon {
+  margin-right: 8px;
+}
+
+.title {
+  font-size: 18px;
+  line-height: 18px;
+  font-weight: 700;
+}
+
+.list {
+  background-color: #262626;
+  border-radius: 12px;
+  width: 295px;
+  padding: 16px;
+}
+
+.item {
+  margin-bottom: 16px;
+}
+
+.item:not(:last-child) {
+  border-bottom: 1px solid #3a3a3a;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* margin-bottom: 16px; */
+}
+
+.dateBlock {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.date {
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.02em;
+  font-weight: 700;
+}
+
+.pagesEnd {
+  color: #686868;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  /* margin-right: 36px; */
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  column-gap: 12px;
+}
+
+.percentRead {
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 500;
+}
+
+.time,
+.pagesNumber,
+.perHourText {
+  color: #686868;
+  font-size: 10px;
+  line-height: 12px;
+  font-weight: 500;
+}
+
+.leftStats {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.rightStats {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.actions {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.perHour {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  line-height: 12px;
+}
+
+.deleteBtn {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+}
