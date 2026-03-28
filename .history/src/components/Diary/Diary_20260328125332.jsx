@@ -23,29 +23,16 @@ import {
 import css from './Diary.module.css';
 
 const Diary = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const prevFinishedRef = useRef(false);
   const dispatch = useDispatch();
   const bookId = useSelector(selectCurrentBookId);
   const book = useSelector(selectCurrentBook);
   const progress = useSelector(selectReadingProgress);
 
+  if (!progress.length) {
+    return <p>No reading progress yet</p>;
+  }
+
   const groupedProgress = groupReadingByDay(progress);
-
-  const totalPagesRead = groupedProgress.reduce(
-    (sum, day) => sum + day.pagesRead,
-    0
-  );
-
-  const isFinished = book?.totalPages && totalPagesRead >= book.totalPages;
-
-  useEffect(() => {
-    if (!prevFinishedRef.current && isFinished) {
-      setIsModalOpen(true);
-    }
-
-    prevFinishedRef.current = isFinished;
-  }, [isFinished]);
 
   const handleDelete = item => {
     if (!book?._id) return;
@@ -72,10 +59,6 @@ const Diary = () => {
   });
 
   const finalData = withAccumulation.reverse();
-
-  if (!progress.length) {
-    return <p>No reading progress yet</p>;
-  }
 
   return (
     <div className={css.diary}>
@@ -145,25 +128,6 @@ const Diary = () => {
           );
         })}
       </ul>
-      {isModalOpen && (
-        <Modal onClose={() => setIsModalOpen(false)}>
-          <div className={css.finishModal}>
-            <h2 className={css.finishTitle}>The book is read</h2>
-
-            <p className={css.finishText}>
-              It was an exciting journey, where each page revealed new horizons,
-              and the characters became inseparable friends.
-            </p>
-
-            <button
-              className={css.finishBtn}
-              onClick={() => setIsModalOpen(false)}
-            >
-              Close
-            </button>
-          </div>
-        </Modal>
-      )}
     </div>
   );
 };

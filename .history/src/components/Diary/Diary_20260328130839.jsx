@@ -37,7 +37,7 @@ const Diary = () => {
     0
   );
 
-  const isFinished = book?.totalPages && totalPagesRead >= book.totalPages;
+  const isFinished = totalPagesRead >= book.totalPages;
 
   useEffect(() => {
     if (!prevFinishedRef.current && isFinished) {

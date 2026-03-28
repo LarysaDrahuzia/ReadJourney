@@ -30,22 +30,11 @@ const Diary = () => {
   const book = useSelector(selectCurrentBook);
   const progress = useSelector(selectReadingProgress);
 
+  if (!progress.length) {
+    return <p>No reading progress yet</p>;
+  }
+
   const groupedProgress = groupReadingByDay(progress);
-
-  const totalPagesRead = groupedProgress.reduce(
-    (sum, day) => sum + day.pagesRead,
-    0
-  );
-
-  const isFinished = book?.totalPages && totalPagesRead >= book.totalPages;
-
-  useEffect(() => {
-    if (!prevFinishedRef.current && isFinished) {
-      setIsModalOpen(true);
-    }
-
-    prevFinishedRef.current = isFinished;
-  }, [isFinished]);
 
   const handleDelete = item => {
     if (!book?._id) return;
@@ -73,9 +62,20 @@ const Diary = () => {
 
   const finalData = withAccumulation.reverse();
 
-  if (!progress.length) {
-    return <p>No reading progress yet</p>;
-  }
+  const totalPagesRead = groupedProgress.reduce(
+    (sum, day) => sum + day.pagesRead,
+    0
+  );
+
+  const isFinished = totalPagesRead >= book.totalPages;
+
+  useEffect(() => {
+    if (!prevFinishedRef.current && isFinished) {
+      setIsModalOpen(true);
+    }
+
+    prevFinishedRef.current = isFinished;
+  }, [isFinished]);
 
   return (
     <div className={css.diary}>

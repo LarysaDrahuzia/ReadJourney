@@ -1,4 +1,3 @@
-import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   selectReadingProgress,
@@ -6,7 +5,7 @@ import {
   selectCurrentBook,
 } from '../../redux/books/selectors.js';
 import { deleteReading } from '../../redux/books/operations.js';
-import Modal from '../Modal/Modal.jsx';
+import css from './Diary.module.css';
 import {
   HourglassIcon,
   PieChartIcon,
@@ -16,36 +15,25 @@ import {
 } from '../Icons/Icons.jsx';
 import {
   formatDate,
+  calcPagesRead,
+  getReadingMinutes,
   getReadPercent,
   groupReadingByDay,
-  getPagesLeftByDay,
 } from '../../utils/readingUtils.js';
-import css from './Diary.module.css';
 
 const Diary = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const prevFinishedRef = useRef(false);
   const dispatch = useDispatch();
   const bookId = useSelector(selectCurrentBookId);
   const book = useSelector(selectCurrentBook);
   const progress = useSelector(selectReadingProgress);
 
-  const groupedProgress = groupReadingByDay(progress);
+  if (!progress.length) {
+    return <p>No reading progress yet</p>;
+  }
 
-  const totalPagesRead = groupedProgress.reduce(
-    (sum, day) => sum + day.pagesRead,
-    0
-  );
-
-  const isFinished = book?.totalPages && totalPagesRead >= book.totalPages;
-
-  useEffect(() => {
-    if (!prevFinishedRef.current && isFinished) {
-      setIsModalOpen(true);
-    }
-
-    prevFinishedRef.current = isFinished;
-  }, [isFinished]);
+  // const sortedProgress = [...progress].sort(
+  //   (a, b) => new Date(b.startReading) - new Date(a.startReading)
+  // );
 
   const handleDelete = item => {
     if (!book?._id) return;
@@ -58,24 +46,7 @@ const Diary = () => {
     );
   };
 
-  let accumulatedPages = 0;
-
-  const reversed = [...groupedProgress].reverse();
-
-  const withAccumulation = reversed.map(day => {
-    accumulatedPages += day.pagesRead;
-
-    return {
-      ...day,
-      accumulatedPages,
-    };
-  });
-
-  const finalData = withAccumulation.reverse();
-
-  if (!progress.length) {
-    return <p>No reading progress yet</p>;
-  }
+  const groupedProgress = groupReadingByDay(progress);
 
   return (
     <div className={css.diary}>
@@ -87,22 +58,24 @@ const Diary = () => {
         </div>
       </div>
       <ul className={css.list}>
-        {finalData.map((day, index) => {
+        {groupedProgress.map((day, index) => {
           const isLast = index === 0;
 
           const pagesRead = day.pagesRead;
 
+          // const minutes = getReadingMinutes(
+          //   item.startReading,
+          //   item.finishReading
+          // );
+
           const minutes = day.minutes;
 
-          const percent = getReadPercent(day.accumulatedPages, book.totalPages);
+          const percent = getReadPercent(pagesRead, book.totalPages);
 
-          const pagesLeft = getPagesLeftByDay(
-            day.accumulatedPages,
-            book.totalPages
-          );
+          const speed = minutes > 0 ? pagesRead / (minutes / 60) : 0;
 
           return (
-            <li key={day.date} className={css.item}>
+            <li key={item._id} className={css.item}>
               <div className={css.header}>
                 <div className={css.dateBlock}>
                   {isLast ? (
@@ -111,9 +84,11 @@ const Diary = () => {
                     <RectangleNotActiveIcon />
                   )}
 
-                  <span className={css.date}>{formatDate(day.date)}</span>
+                  <span className={css.date}>
+                    {formatDate(item.startReading)}
+                  </span>
                 </div>
-                <span className={css.pagesEnd}>{pagesLeft} pages</span>
+                <span className={css.pagesEnd}>{pagesRead} pages</span>
               </div>
 
               <div className={css.stats}>
@@ -130,13 +105,15 @@ const Diary = () => {
                     <button
                       className={css.deleteBtn}
                       disabled={!bookId}
-                      onClick={() => handleDelete(day.items[0])}
+                      onClick={() => handleDelete(item)}
                     >
                       <TrashIcon />
                     </button>
                   </div>
                   <div className={css.perHour}>
-                    <span className={css.pagesNumber}>{pagesRead} pages</span>
+                    <span className={css.pagesNumber}>
+                      {speed.toFixed(0)} pages
+                    </span>
                     <span className={css.perHourText}>per hour</span>
                   </div>
                 </div>
@@ -145,25 +122,6 @@ const Diary = () => {
           );
         })}
       </ul>
-      {isModalOpen && (
-        <Modal onClose={() => setIsModalOpen(false)}>
-          <div className={css.finishModal}>
-            <h2 className={css.finishTitle}>The book is read</h2>
-
-            <p className={css.finishText}>
-              It was an exciting journey, where each page revealed new horizons,
-              and the characters became inseparable friends.
-            </p>
-
-            <button
-              className={css.finishBtn}
-              onClick={() => setIsModalOpen(false)}
-            >
-              Close
-            </button>
-          </div>
-        </Modal>
-      )}
     </div>
   );
 };

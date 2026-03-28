@@ -66,11 +66,15 @@ export const formatReadingTime = totalMinutes => {
 };
 
 /**
- * Сторінок залишилось на кожен день
+ * Сторінок залишилось
  */
 
-export const getPagesLeftByDay = (accumulatedPages, totalPages) => {
-  return Math.max(totalPages - accumulatedPages, 0);
+export const getPagesLeft = (progress, totalPages) => {
+  if (!Array.isArray(progress) || !progress.length) return totalPages;
+
+  const lastPage = Math.max(...progress.map(item => item.finishPage || 0));
+
+  return Math.max(totalPages - lastPage, 0);
 };
 
 /**

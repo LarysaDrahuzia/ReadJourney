@@ -30,6 +30,10 @@ const Diary = () => {
   const book = useSelector(selectCurrentBook);
   const progress = useSelector(selectReadingProgress);
 
+  if (!progress.length) {
+    return <p>No reading progress yet</p>;
+  }
+
   const groupedProgress = groupReadingByDay(progress);
 
   const totalPagesRead = groupedProgress.reduce(
@@ -37,7 +41,7 @@ const Diary = () => {
     0
   );
 
-  const isFinished = book?.totalPages && totalPagesRead >= book.totalPages;
+  const isFinished = totalPagesRead >= book.totalPages;
 
   useEffect(() => {
     if (!prevFinishedRef.current && isFinished) {
@@ -72,10 +76,6 @@ const Diary = () => {
   });
 
   const finalData = withAccumulation.reverse();
-
-  if (!progress.length) {
-    return <p>No reading progress yet</p>;
-  }
 
   return (
     <div className={css.diary}>

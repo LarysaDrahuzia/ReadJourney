@@ -1,4 +1,3 @@
-import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   selectReadingProgress,
@@ -6,7 +5,7 @@ import {
   selectCurrentBook,
 } from '../../redux/books/selectors.js';
 import { deleteReading } from '../../redux/books/operations.js';
-import Modal from '../Modal/Modal.jsx';
+import css from './Diary.module.css';
 import {
   HourglassIcon,
   PieChartIcon,
@@ -18,34 +17,20 @@ import {
   formatDate,
   getReadPercent,
   groupReadingByDay,
-  getPagesLeftByDay,
+  getPagesLeft,
 } from '../../utils/readingUtils.js';
-import css from './Diary.module.css';
 
 const Diary = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const prevFinishedRef = useRef(false);
   const dispatch = useDispatch();
   const bookId = useSelector(selectCurrentBookId);
   const book = useSelector(selectCurrentBook);
   const progress = useSelector(selectReadingProgress);
 
+  if (!progress.length) {
+    return <p>No reading progress yet</p>;
+  }
+
   const groupedProgress = groupReadingByDay(progress);
-
-  const totalPagesRead = groupedProgress.reduce(
-    (sum, day) => sum + day.pagesRead,
-    0
-  );
-
-  const isFinished = book?.totalPages && totalPagesRead >= book.totalPages;
-
-  useEffect(() => {
-    if (!prevFinishedRef.current && isFinished) {
-      setIsModalOpen(true);
-    }
-
-    prevFinishedRef.current = isFinished;
-  }, [isFinished]);
 
   const handleDelete = item => {
     if (!book?._id) return;
@@ -58,25 +43,6 @@ const Diary = () => {
     );
   };
 
-  let accumulatedPages = 0;
-
-  const reversed = [...groupedProgress].reverse();
-
-  const withAccumulation = reversed.map(day => {
-    accumulatedPages += day.pagesRead;
-
-    return {
-      ...day,
-      accumulatedPages,
-    };
-  });
-
-  const finalData = withAccumulation.reverse();
-
-  if (!progress.length) {
-    return <p>No reading progress yet</p>;
-  }
-
   return (
     <div className={css.diary}>
       <div className={css.premier}>
@@ -87,19 +53,20 @@ const Diary = () => {
         </div>
       </div>
       <ul className={css.list}>
-        {finalData.map((day, index) => {
-          const isLast = index === 0;
+        let accumulatedPages = 0;
+        {groupedProgress.map(day => {
+          accumulatedPages += day.pagesRead;
+          // const isLast = index === 0;
 
           const pagesRead = day.pagesRead;
 
           const minutes = day.minutes;
 
-          const percent = getReadPercent(day.accumulatedPages, book.totalPages);
+          const percent = getReadPercent(pagesRead, book.totalPages);
 
-          const pagesLeft = getPagesLeftByDay(
-            day.accumulatedPages,
-            book.totalPages
-          );
+          const pagesLeft = getPagesLeft(progress, book.totalPages);
+
+          // const speed = minutes > 0 ? pagesRead / (minutes / 60) : 0;
 
           return (
             <li key={day.date} className={css.item}>
@@ -145,25 +112,6 @@ const Diary = () => {
           );
         })}
       </ul>
-      {isModalOpen && (
-        <Modal onClose={() => setIsModalOpen(false)}>
-          <div className={css.finishModal}>
-            <h2 className={css.finishTitle}>The book is read</h2>
-
-            <p className={css.finishText}>
-              It was an exciting journey, where each page revealed new horizons,
-              and the characters became inseparable friends.
-            </p>
-
-            <button
-              className={css.finishBtn}
-              onClick={() => setIsModalOpen(false)}
-            >
-              Close
-            </button>
-          </div>
-        </Modal>
-      )}
     </div>
   );
 };
