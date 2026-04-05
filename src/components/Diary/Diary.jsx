@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   selectReadingProgress,
@@ -6,7 +6,6 @@ import {
   selectCurrentBook,
 } from '../../redux/books/selectors.js';
 import { deleteReading } from '../../redux/books/operations.js';
-import Modal from '../Modal/Modal.jsx';
 import {
   HourglassIcon,
   PieChartIcon,
@@ -23,59 +22,51 @@ import {
 import css from './Diary.module.css';
 
 const Diary = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const prevFinishedRef = useRef(false);
   const dispatch = useDispatch();
   const bookId = useSelector(selectCurrentBookId);
   const book = useSelector(selectCurrentBook);
   const progress = useSelector(selectReadingProgress);
 
-  const groupedProgress = groupReadingByDay(progress);
-
-  const totalPagesRead = groupedProgress.reduce(
-    (sum, day) => sum + day.pagesRead,
-    0
+  const groupedProgress = useMemo(
+    () => groupReadingByDay(progress),
+    [progress]
   );
 
-  const isFinished = book?.totalPages && totalPagesRead >= book.totalPages;
+  // const lastPage = useMemo(() => {
+  //   if (!progress.length) return 0;
 
-  useEffect(() => {
-    if (!prevFinishedRef.current && isFinished) {
-      setIsModalOpen(true);
-    }
+  //   return Math.max(...progress.map(item => item.finishPage || 0));
+  // }, [progress]);
 
-    prevFinishedRef.current = isFinished;
-  }, [isFinished]);
+  // const isFinished = lastPage >= (book?.totalPages || 0);
 
   const handleDelete = item => {
-    if (!book?._id) return;
+    if (!bookId) return;
 
     dispatch(
       deleteReading({
-        bookId: book._id,
+        bookId,
         readingId: item._id,
       })
     );
   };
 
-  let accumulatedPages = 0;
+  const finalData = useMemo(() => {
+    let accumulatedPages = 0;
 
-  const reversed = [...groupedProgress].reverse();
+    const reversed = [...groupedProgress].reverse();
 
-  const withAccumulation = reversed.map(day => {
-    accumulatedPages += day.pagesRead;
+    const withAccumulation = reversed.map(day => {
+      accumulatedPages += day.pagesRead;
 
-    return {
-      ...day,
-      accumulatedPages,
-    };
-  });
+      return {
+        ...day,
+        accumulatedPages,
+      };
+    });
 
-  const finalData = withAccumulation.reverse();
-
-  if (!progress.length) {
-    return <p>No reading progress yet</p>;
-  }
+    return withAccumulation.reverse();
+  }, [groupedProgress]);
 
   return (
     <div className={css.diary}>
@@ -88,24 +79,27 @@ const Diary = () => {
       </div>
       <ul className={css.list}>
         {finalData.map((day, index) => {
-          const isLast = index === 0;
+          const isFirst = index === 0;
 
           const pagesRead = day.pagesRead;
 
           const minutes = day.minutes;
 
-          const percent = getReadPercent(day.accumulatedPages, book.totalPages);
+          const percent = getReadPercent(
+            day.accumulatedPages,
+            book?.totalPages || 0
+          );
 
           const pagesLeft = getPagesLeftByDay(
             day.accumulatedPages,
-            book.totalPages
+            book?.totalPages || 0
           );
 
           return (
             <li key={day.date} className={css.item}>
               <div className={css.header}>
                 <div className={css.dateBlock}>
-                  {isLast ? (
+                  {isFirst ? (
                     <RectangleActiveIcon />
                   ) : (
                     <RectangleNotActiveIcon />
@@ -145,25 +139,6 @@ const Diary = () => {
           );
         })}
       </ul>
-      {isModalOpen && (
-        <Modal onClose={() => setIsModalOpen(false)}>
-          <div className={css.finishModal}>
-            <h2 className={css.finishTitle}>The book is read</h2>
-
-            <p className={css.finishText}>
-              It was an exciting journey, where each page revealed new horizons,
-              and the characters became inseparable friends.
-            </p>
-
-            <button
-              className={css.finishBtn}
-              onClick={() => setIsModalOpen(false)}
-            >
-              Close
-            </button>
-          </div>
-        </Modal>
-      )}
     </div>
   );
 };

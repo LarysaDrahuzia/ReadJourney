@@ -172,7 +172,9 @@ const sliceBooks = createSlice({
       .addCase(myBookReadingFinish.fulfilled, (state, action) => {
         state.reading.isLoading = false;
         state.currentBook.data = action.payload;
-        state.reading.progress = action.payload.progress || [];
+        state.reading.progress = Array.isArray(action.payload.progress)
+          ? [...action.payload.progress]
+          : [];
         state.reading.statistics = action.payload.statistics || null;
         state.reading.timeLeftToRead = action.payload.timeLeftToRead ?? null;
 

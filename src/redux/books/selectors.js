@@ -41,9 +41,7 @@ export const selectReadingError = state => state.books.reading.error;
 export const selectReadingTimeLeft = state =>
   state.books.reading.timeLeftToRead;
 export const selectReadingProgress = state =>
-  Array.isArray(state.books.reading.progress)
-    ? state.books.reading.progress
-    : [];
+  state.books.reading.progress ?? [];
 export const selectReadingStatistics = state => state.books.reading.statistics;
 export const selectIsReadingNow = state =>
   state.books.reading.progress.some(item => !item.finishReading);

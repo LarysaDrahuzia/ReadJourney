@@ -131,6 +131,7 @@ export const myBookReadingFinish = createAsyncThunk(
         id: bookId,
         page: endPage,
       });
+      // console.log('FINISH RESPONSE:', data);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(

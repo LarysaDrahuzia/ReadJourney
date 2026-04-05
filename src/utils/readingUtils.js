@@ -1,14 +1,21 @@
 export const formatDate = iso => {
   if (!iso) return '';
-  return new Date(iso).toLocaleDateString('uk-UA');
+
+  const date = new Date(iso);
+  if (isNaN(date)) return '';
+
+  return date.toLocaleDateString('uk-UA');
 };
 
 /**
  * Кількість прочитаних сторінок за сесію
  */
 
-export const calcPagesRead = (startPage = 0, finishPage = 0) =>
-  Math.max(finishPage - startPage, 0);
+export const calcPagesRead = (startPage = 0, finishPage = 0) => {
+  if (typeof startPage !== 'number' || typeof finishPage !== 'number') return 0;
+
+  return Math.max(finishPage - startPage + 1, 0);
+};
 
 /**
  * Загальна кількість прочитаних сторінок
@@ -26,7 +33,7 @@ export const getTotalPagesRead = progress => {
  */
 export const getReadPercent = (pagesRead, totalPages) => {
   if (!totalPages || pagesRead <= 0) return 0;
-  return (pagesRead / totalPages) * 100;
+  return Math.min((pagesRead / totalPages) * 100, 100);
 };
 
 /**
@@ -35,7 +42,12 @@ export const getReadPercent = (pagesRead, totalPages) => {
 export const getReadingMinutes = (start, finish) => {
   if (!start || !finish) return 0;
 
-  const diff = new Date(finish) - new Date(start);
+  const startDate = new Date(start);
+  const finishDate = new Date(finish);
+
+  if (isNaN(startDate) || isNaN(finishDate)) return 0;
+
+  const diff = finishDate - startDate;
 
   if (diff <= 0) return 0;
 
@@ -85,7 +97,7 @@ export const getAverageReadingSpeed = progress => {
       const pages = calcPagesRead(item.startPage, item.finishPage);
       const minutes = getReadingMinutes(item.startReading, item.finishReading);
 
-      if (pages > 0 && minutes > 0) {
+      if (minutes > 0) {
         acc.totalPages += pages;
         acc.totalMinutes += minutes;
       }
@@ -101,8 +113,11 @@ export const getAverageReadingSpeed = progress => {
 };
 
 export const groupReadingByDay = progress => {
+  if (!Array.isArray(progress)) return [];
+
   const grouped = progress.reduce((acc, item) => {
-    const dateKey = new Date(item.startReading).toISOString().split('T')[0];
+    const date = new Date(item.startReading);
+    const dateKey = date.toLocaleDateString('uk-Ua');
 
     if (!acc[dateKey]) {
       acc[dateKey] = {
